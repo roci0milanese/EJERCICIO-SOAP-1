@@ -22,21 +22,21 @@ namespace ClienteSOAPWinForms
         {
             try
             {
-                var cliente = new superCacho.CountryInfoServiceSoapTypeClient("CountryInfoServiceSoap"); // ESTO CREA UNA INSTANCIA DEL CLIENTE SOAP UTILIZANDO LA CONFIGURACIÓN DEFINIDA EN EL ARCHIVO App.config
+                // Crear cliente SOAP
+                var cliente = new superCacho.CountryInfoServiceSoapTypeClient("CountryInfoServiceSoap");
 
-                string codigo = textBox1.Text; // ESTO OBTIENE EL CÓDIGO DEL PAÍS INGRESADO POR EL USUARIO
+                // Obtener código ingresado por el usuario (ej: AR)
+                string codigo = textBox1.Text;
 
-                var resultado = cliente.FullCountryInfo(codigo); // ESTO HACE LA LLAMADA AL SERVICIO SOAP
+                // Llamar al método con parámetro
+                var info = cliente.FullCountryInfo(codigo);
 
-
+                // Mostrar resultado en ventana emergente
                 MessageBox.Show(
-                    "Nombre del país: " + resultado.sName +
-                    "\nCódigo telefónico: +" + resultado.sPhoneCode +
-                    "\nCiudad capital: " + resultado.sCapitalCity +
-                    "\nCódigo del continente: " + resultado.sContinentCode,
-                    "Información del país",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information
+                    "Resultado:" + "\n" +
+                    "País: " + info.sName + "\n" +
+                    "Capital: " + info.sCapitalCity + "\n" +
+                    "Moneda: " + info.sCurrencyISOCode + "\n" 
                 );
             }
             catch (Exception ex)
